@@ -73,21 +73,32 @@ BOARD_HARDWARE_CLASS := hardware/samsung/cmhw
 
 # Graphics
 BOARD_EGL_CFG := device/samsung/smdk4412-common/configs/egl.cfg
+BOARD_EGL_NEEDS_HANDLE_VALUE := true
 USE_OPENGL_RENDERER := true
 BOARD_USES_SKIAHWJPEG := true
-COMMON_GLOBAL_CFLAGS += -DSEC_HWJPEG_G2D -DFORCE_SCREENSHOT_CPU_PATH -DWORKAROUND_BUG_10194508 -DADD_LEGACY_ACQUIRE_BUFFER_SYMBOL
+COMMON_GLOBAL_CFLAGS += -DSEC_HWJPEG_G2D -DWORKAROUND_BUG_10194508
+BOARD_USE_MALI_ALIGNMENT := true
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
+
+# HWC
+BOARD_USES_PROPRIETARY_HWC := true
 
 # FIMG Acceleration
 BOARD_USES_FIMGAPI := true
 BOARD_USES_SKIA_FIMGAPI := true
+BOARD_USES_SKIA_FIMGAPI_BOOSTUP := true
 
 # Enable WEBGL in WebKit
 ENABLE_WEBGL := true
 
 # HWComposer
 BOARD_USES_HWCOMPOSER := true
-BOARD_USE_SYSFS_VSYNC_NOTIFICATION := true
+#BOARD_USE_SYSFS_VSYNC_NOTIFICATION := true
+
+# HDMI
+BOARD_USES_HDMI := true
+BOARD_USES_SAMSUNG_HDMI := true
+BOARD_HDMI_DDC_CH := DDC_CH_I2C_5
 
 # Camera
 BOARD_CAMERA_HAVE_ISO := true
@@ -105,14 +116,15 @@ BOARD_USE_METADATABUFFERTYPE := true
 BOARD_USES_MFC_FPS := true
 BOARD_USE_S3D_SUPPORT := true
 BOARD_USE_CSC_FIMC := false
+BOARD_CANT_REALLOCATE_OMX_BUFFERS := true
 
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true
 
 # Logging
-TARGET_USES_LOGD := false
+#TARGET_USES_LOGD := false
 
-BOARD_USES_LEGACY_MMAP := true
+#BOARD_USES_LEGACY_MMAP := true
 
 # RIL
 BOARD_MOBILEDATA_INTERFACE_NAME := "pdp0"
@@ -146,8 +158,6 @@ BOARD_BLUEDROID_VENDOR_CONF := device/samsung/smdk4412-common/bluetooth/vnd_smdk
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/s3c-usbgadget/gadget/lun%d/file"
 
 # Recovery
-BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/smdk4412-common/recovery/recovery_keys.c
-BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/smdk4412-common/recovery/graphics.c
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_15x24.h\"
 BOARD_UMS_LUNFILE := "/sys/class/android_usb/android0/f_mass_storage/lun0/file"
 BOARD_USES_MMCUTILS := true
@@ -167,7 +177,7 @@ BACKLIGHT_PATH := /sys/class/backlight/panel/brightness
 # Override healthd HAL
 BOARD_HAL_STATIC_LIBRARIES := libhealthd.exynos4
 
-# LPM Battery Percentage
+# Show Battery Percentage in LPM mode
 BOARD_CHARGER_SHOW_PERCENTAGE := true
 
 # inherit from the proprietary version
