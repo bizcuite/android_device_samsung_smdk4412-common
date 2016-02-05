@@ -178,14 +178,13 @@ PRODUCT_COPY_FILES += \
 # Graphics
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.zygote.disable_gl_preload=1 \
-    ro.opengles.version=131072
+    ro.opengles.version=131072 \
+    ro.bq.gpu_to_cpu_unsupported=1 \
+    debug.hwui.render_dirty_regions=false
 
 PRODUCT_TAGS += dalvik.gc.type-precise
 
 $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
-# Set default USB interface
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp
 
 # Include exynos4 platform specific parts
 TARGET_HAL_PATH := hardware/samsung/exynos4/hal
