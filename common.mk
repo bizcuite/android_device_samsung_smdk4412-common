@@ -76,6 +76,7 @@ PRODUCT_PACKAGES += \
     com.android.future.usb.accessory \
     gralloc.exynos4 \
     hwcomposer.exynos4 \
+    Gello \
     libExynosHWCService \
     libExynosIPService \
     libfimg \
