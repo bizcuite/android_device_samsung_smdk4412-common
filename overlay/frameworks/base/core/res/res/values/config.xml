@@ -54,7 +54,7 @@
     <integer name="config_deskDockKeepsScreenOn">0</integer>
 
      <!-- Fix Autorotation Sensor -->
-     <bool name="config_useSystemClockforSensors">true</bool>
+     <!--<bool name="config_useSystemClockforSensors">true</bool>-->
      
     <!-- Device supports LED flashlight
     <bool name="config_enableTorch">true</bool> -->
