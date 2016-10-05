@@ -67,7 +67,7 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/gps.conf:system/etc/gps.conf
 
 # Packages
-PRODUCT_PACKAGES += \
+PRODUCT_PACKAGES := \
     audio.a2dp.default \
     audio.primary.smdk4x12 \
     audio.r_submix.default \
@@ -81,6 +81,7 @@ PRODUCT_PACKAGES += \
     libfimg \
     libnetcmdiface \
     libsecion \
+    libstlport \
     libsync \
     libUMP \
     lights.exynos4 \
@@ -90,10 +91,6 @@ PRODUCT_PACKAGES += \
 
 #to keep
 #AdvancedDisplay
-
-# Stlport    
-PRODUCT_PACKAGES += \
-    libstlport
 
 ifneq ($(TARGET_HAS_CAM_FLASH) ,false)
 PRODUCT_PACKAGES += \
@@ -130,7 +127,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
-    static_busybox \
     make_ext4fs \
     setup_fs
 

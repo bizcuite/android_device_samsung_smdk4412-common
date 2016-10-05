@@ -96,7 +96,7 @@ ENABLE_WEBGL := true
 
 # HWComposer
 BOARD_USES_HWCOMPOSER := true
-#BOARD_USE_SYSFS_VSYNC_NOTIFICATION := true
+BOARD_USE_SYSFS_VSYNC_NOTIFICATION := true
 
 # HDMI
 BOARD_USES_HDMI := true
@@ -156,7 +156,6 @@ BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_HAVE_SAMSUNG_BLUETOOTH := true
 BOARD_CUSTOM_BT_CONFIG := device/samsung/smdk4412-common/bluetooth/vnd_smdk4x12.txt
-#BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/smdk4412-common/bluetooth/vnd_smd4x12.txt
 
 # Vold
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/s3c-usbgadget/gadget/lun%d/file"
