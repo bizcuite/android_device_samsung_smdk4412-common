@@ -30,8 +30,17 @@ TARGET_ARCH_VARIANT_CPU := cortex-a9
 TARGET_CPU_VARIANT := cortex-a9
 ARCH_ARM_HAVE_NEON := true
 ARCH_ARM_HAVE_TLS_REGISTER := true
-#TARGET_GLOBAL_CFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
-#TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
+# Board already specifies -mcpu, but it won't hurt to add mtune, too
+BOARD_GLOBAL_CFLAGS += -mtune=cortex-a9
+BOARD_GLOBAL_CPPFLAGS += -mtune=cortex-a9
+
+# Specify L1/L2 caches used for Exynos 4412
+BOARD_GLOBAL_CFLAGS += --param l1-cache-line-size=32 --param l1-cache-size=32 --param l2-cache-size=1024
+BOARD_GLOBAL_CPPFLAGS += --param l1-cache-line-size=32 --param l1-cache-size=32 --param l2-cache-size=1024
+
+# Hint the compiler that we're using quad-core CPU
+#BOARD_GLOBAL_CFLAGS += -mvectorize-with-neon-quad
+#BOARD_GLOBAL_CPPFLAGS += -mvectorize-with-neon-quad
 
 EXYNOS4X12_ENHANCEMENTS := true
 EXYNOS4_ENHANCEMENTS := true
@@ -73,13 +82,12 @@ TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_HARDWARE_CLASS := hardware/samsung/cmhw
 
 # Graphics
-BOARD_EGL_CFG := device/samsung/smdk4412-common/configs/egl.cfg
 BOARD_EGL_NEEDS_HANDLE_VALUE := true
 USE_OPENGL_RENDERER := true
 BOARD_USES_SKIAHWJPEG := true
 #COMMON_GLOBAL_CFLAGS += -DSEC_HWJPEG_G2D -DWORKAROUND_BUG_10194508
 BOARD_EGL_WORKAROUND_BUG_10194508 := true
-BOARD_GLOBAL_FLAGS += -DFORCE_SCREENSHOT_CPU_PATH
+BOARD_GLOBAL_CFLAGS += -DFORCE_SCREENSHOT_CPU_PATH
 BOARD_USE_MALI_ALIGNMENT := true
 #TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
 
@@ -124,13 +132,7 @@ BOARD_CANT_REALLOCATE_OMX_BUFFERS := true
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true
 
-# Logging
-#TARGET_USES_LOGD := false
-
-#BOARD_USES_LEGACY_MMAP := true
-
-# RIL
-BOARD_MOBILEDATA_INTERFACE_NAME := "pdp0"
+BOARD_USES_LEGACY_MMAP := true
 
 # Wifi
 BOARD_WLAN_DEVICE                := bcmdhd
@@ -142,12 +144,14 @@ BOARD_HOSTAPD_DRIVER             := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_bcmdhd
 WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/dhd.ko"
 WIFI_DRIVER_FW_PATH_PARAM        := "/sys/module/dhd/parameters/firmware_path"
+WIFI_DRIVER_NVRAM_PATH_PARAM     := "/sys/module/dhd/parameters/nvram_path"
+WIFI_DRIVER_NVRAM_PATH           := "/system/etc/wifi/nvram_net.txt"
 WIFI_DRIVER_FW_PATH_STA          := "/system/etc/wifi/bcmdhd_sta.bin"
 WIFI_DRIVER_FW_PATH_AP           := "/system/etc/wifi/bcmdhd_apsta.bin"
 WIFI_DRIVER_FW_PATH_P2P          := "/system/etc/wifi/bcmdhd_p2p.bin"
 WIFI_DRIVER_MODULE_NAME          := "dhd"
-WIFI_DRIVER_MODULE_ARG           := "firmware_path=/system/etc/wifi/bcmdhd_sta.bin nvram_path=/system/etc/wifi/nvram_net.txt"
-WIFI_DRIVER_MODULE_AP_ARG        := "firmware_path=/system/etc/wifi/bcmdhd_apsta.bin nvram_path=/system/etc/wifi/nvram_net.txt"
+WIFI_DRIVER_MODULE_ARG           := "firmware_path=/system/etc/wifi/bcmdhd_sta.bin_b2 nvram_path=/system/etc/wifi/nvram_net.txt"
+WIFI_DRIVER_MODULE_AP_ARG        := "firmware_path=/system/etc/wifi/bcmdhd_apsta.bin_b2 nvram_path=/system/etc/wifi/nvram_net.txt"
 WIFI_BAND                        := 802_11_ABG
 BOARD_HAVE_SAMSUNG_WIFI          := true
 
@@ -176,6 +180,7 @@ RED_LED_PATH := /sys/class/leds/led_r/brightness
 GREEN_LED_PATH := /sys/class/leds/led_g/brightness
 BLUE_LED_PATH := /sys/class/leds/led_b/brightness
 BACKLIGHT_PATH := /sys/class/backlight/panel/brightness
+BOARD_CHARGER_SHOW_PERCENTAGE := true
 
 # Override healthd HAL
 BOARD_HAL_STATIC_LIBRARIES := libhealthd.exynos4
