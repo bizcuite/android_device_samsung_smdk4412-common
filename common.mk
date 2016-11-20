@@ -46,8 +46,13 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
     $(COMMON_PATH)/configs/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
 
+#Busybox
+PRODUCT_PACKAGES += \
+    busybox
+
 #wifi
 PRODUCT_PACKAGES += \
+    dhcpd.conf \
     hostapd \
     libwpa_client \
     wpa_supplicant \
@@ -62,7 +67,8 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/gps.conf:system/etc/gps.conf
 
 # Packages
-PRODUCT_PACKAGES := \
+PRODUCT_PACKAGES += \
+    AdvancedDisplay \
     audio.a2dp.default \
     audio.primary.smdk4x12 \
     audio.r_submix.default \
@@ -91,9 +97,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_BOOT_JARS += \
     telephony-ext
 
-#to keep
-#AdvancedDisplay
-
 ifneq ($(TARGET_HAS_CAM_FLASH) ,false)
 PRODUCT_PACKAGES += \
     Torch
@@ -113,8 +116,8 @@ PRODUCT_PACKAGES += \
     libOMX.SEC.M4V.Decoder \
     libOMX.SEC.WMV.Decoder \
     libOMX.SEC.AVC.Encoder \
-    libOMX.SEC.M4V.Encoder
-#   libOMX.SEC.VP8.Decoder
+    libOMX.SEC.M4V.Encoder \
+    libOMX.SEC.VP8.Decoder
 
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/media_codecs_performance.xml:system/etc/media_codecs_performance.xml \
