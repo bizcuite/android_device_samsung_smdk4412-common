@@ -90,13 +90,6 @@ PRODUCT_PACKAGES += \
     tinymix \
     AudioFX 
 
-# Telephony
-PRODUCT_PACKAGES += \
-    telephony-ext
-
-PRODUCT_BOOT_JARS += \
-    telephony-ext
-
 ifneq ($(TARGET_HAS_CAM_FLASH) ,false)
 PRODUCT_PACKAGES += \
     Torch

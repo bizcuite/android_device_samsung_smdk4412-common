@@ -455,7 +455,11 @@ service sec_keyboard /system/bin/sec_keyboard /dev/ttySAC2
 	group system
 
 on property:ro.uart_debug=0
-	start sec_keyboard
+    start sec_keyboard
+
+# rerun macloader to fix wifi after hotspot
+on property:wlan.driver.status=unloaded
+	start macloader
 
 service charger /sbin/healthd -c
     class charger
